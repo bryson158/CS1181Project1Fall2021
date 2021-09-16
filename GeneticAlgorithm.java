@@ -36,7 +36,12 @@ public class GeneticAlgorithm {
                     c.mutate();
                 }
             }
+            population.sort(Chromosome::compareTo);
+            System.out.println(population.get(0).toString());
         }
+        population.sort(Chromosome::compareTo);
+
+        System.out.println(population.get(0).toString());
     }
 
     //Reads in the file and adds all the items in the file to an array list
