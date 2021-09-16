@@ -67,7 +67,15 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
 
     //Compares the chromosomes to each other using their fitness scores
     public int compareTo(Chromosome other){
-        return 0;
+        if(this.getFitness() > other.getFitness()){
+            return -1;
+        }
+        else if(this.getFitness() < other.getFitness()){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     //Displays all items in the chromosome
