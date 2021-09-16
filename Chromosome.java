@@ -7,14 +7,17 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
     //Empty constructor
     public Chromosome(){}
 
-    //Constructor for the chromosome class
+    //Constructor for the chromosome class and randomizes if the item is included in the chromosome
     public Chromosome(ArrayList<Item> items){
-        for (Item i : items){
+        for (int i = 0; i < this.size(); i++){
             if(rng.nextInt(10) == 1){
-
+                this.add(new Item(items.get(i)));
+                this.get(i).setIncluded(true);
+                this.get(i);
             }
             else {
-                this.add()
+                this.add(new Item(items.get(i)));
+                this.get(i).setIncluded(false);
             }
         }
     }
