@@ -8,15 +8,40 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
     public Chromosome(){}
 
     //Constructor for the chromosome class
-    public Chromosome(ArrayList<Item> items){}
+    public Chromosome(ArrayList<Item> items){
+        for (Item i : items){
+            if(rng.nextInt(10) == 1){
 
-    //Logic for determining a crossover between two chromosomes
-    public Chromosome crossover(Chromosome other){}
+            }
+            else {
+                this.add()
+            }
+        }
+    }
+
+    //Creates a child chromosome and randomly adds items from one parent or the other
+    public Chromosome crossover(Chromosome other){
+        ArrayList<Item> newChromosome = this;
+
+        for(int i = 0; i < this.size(); i++){
+            if (rng.nextBoolean()){
+                if(other.get(i).isIncluded()){
+                    newChromosome.get(i).setIncluded(true);
+                }
+                else {
+                    newChromosome.get(i).setIncluded(false);
+                }
+            }
+        }
+    }
 
     //Determines if the chromosome will mutate or not
-    public void mutate(){}
+    public void mutate(){
+        //50% chance the chromosome will mutate
+    }
 
     //Scores the fitness of the chromosome if the chromosome weighs more than 10 pounds the result will be 0
+    // otherwise this will return the rounded weight of the chromosome
     public int getFitness(){
         double totalWeight = 0;
 
@@ -38,17 +63,17 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
 
     //TODO- display all items included in the chromosome
     public String toString(){
-        String returnedString = "";
+        StringBuilder returnedString = new StringBuilder();
 
         for(Item i: this){
-            if(i.isIncluded() == true){
-                returnedString += i.toString();
+            if(i.isIncluded()){
+                returnedString.append(i.toString());
             }
         }
 
-        if(returnedString == ""){
+        if(returnedString.toString().equals("")){
             return "There's no items in this chromosome";
         }
-        return returnedString;
+        return returnedString.toString();
     }
 }

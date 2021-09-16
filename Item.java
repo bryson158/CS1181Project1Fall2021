@@ -18,6 +18,7 @@ public class Item {
         this.value = other.value;
     }
 
+    //Get/Setter methods needed for the class
     public String getName() {
         return name;
     }
@@ -32,6 +33,10 @@ public class Item {
 
     public int getValue(){
         return value;
+    }
+
+    public void setIncluded(boolean included){
+        this.included = included;
     }
 
     @Override
