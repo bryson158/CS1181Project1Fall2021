@@ -24,18 +24,15 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
 
     //Creates a child chromosome and randomly adds items from one parent or the other
     public Chromosome crossover(Chromosome other){
-        ArrayList<Item> newChromosome = this;
-
         for(int i = 0; i < this.size(); i++){
             if (rng.nextBoolean()){
-                if(other.get(i).isIncluded()){
-                    newChromosome.get(i).setIncluded(true);
-                }
-                else {
-                    newChromosome.get(i).setIncluded(false);
-                }
+                this.get(i).setIncluded(this.get(i).isIncluded());
+            }
+            else {
+                this.get(i).setIncluded(other.get(i).isIncluded());
             }
         }
+        return this;
     }
 
     //Determines if the chromosome will mutate or not
