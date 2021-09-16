@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class GeneticAlgorithm {
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Item> items = readData("items.txt");
+
+        ArrayList<Chromosome> population = new ArrayList<>();
+        population.addAll(initializePopulation(items, 10));
     }
 
     //Reads in the file and adds all the items in the file to an array list
@@ -29,6 +32,10 @@ public class GeneticAlgorithm {
     //Builds out the initial population of chromosomes
     public static ArrayList<Chromosome> initializePopulation(ArrayList<Item> items, int populationSize){
         ArrayList<Chromosome> chromosomes = new ArrayList<>();
+
+        for(int i = 0; i < populationSize; i++){
+            chromosomes.add(new Chromosome(items));
+        }
 
         return chromosomes;
     }
