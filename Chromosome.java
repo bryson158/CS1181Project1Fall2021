@@ -2,18 +2,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome>{
-    private static Random rng;
+    private static Random rng = new Random();
 
     //Empty constructor
     public Chromosome(){}
 
     //Constructor for the chromosome class and randomizes if the item is included in the chromosome
     public Chromosome(ArrayList<Item> items){
-        for (int i = 0; i < this.size(); i++){
+        for (int i = 0; i < items.size(); i++){
             if(rng.nextInt(10) == 1){
                 this.add(new Item(items.get(i)));
                 this.get(i).setIncluded(true);
-                this.get(i);
             }
             else {
                 this.add(new Item(items.get(i)));
@@ -80,17 +79,17 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
 
     //Displays all items in the chromosome
     public String toString(){
-        StringBuilder returnedString = new StringBuilder();
+        String returnedString = "";
 
         for(Item i: this){
             if(i.isIncluded()){
-                returnedString.append(i.toString());
+                returnedString += i.getName() + " " + i.getWeight() + " " + i.getValue() + " ";
             }
         }
 
         if(returnedString.toString().equals("")){
             return "There's no items in this chromosome";
         }
-        return returnedString.toString();
+        return returnedString + this.getFitness();
     }
 }

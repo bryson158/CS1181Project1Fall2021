@@ -9,12 +9,12 @@ public class GeneticAlgorithm {
     private static Random rng = new Random();
 
     public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<Item> items = readData("items.txt");
+        ArrayList<Item> items = readData("moreitems.txt");
 
         ArrayList<Chromosome> population = new ArrayList<>(initializePopulation(items, 10));
 
         //Epochs loop
-        for(int i = 0; i < 1000; i++){
+        for(int i = 0; i < 10000; i++){
             population.sort(Chromosome::compareTo);
 
             ArrayList<Chromosome> childChromosomes = new ArrayList<>();
@@ -30,14 +30,13 @@ public class GeneticAlgorithm {
                 population.add(childChromosomes.get(p));
             }
 
-            //Determines which if any chromosomes mutate
-            for(Chromosome c: population){
-                if(rng.nextInt(15) == 1){
+            //Chooses around 10% of the population to mutate. Note this doesn't guarantee 10% of the population will
+            // mutate but rather that on average 10% of the population will be chosen to mutate
+            for(Chromosome c: population) {
+                if (rng.nextInt(10) == 1) {
                     c.mutate();
                 }
             }
-            population.sort(Chromosome::compareTo);
-            System.out.println(population.get(0).toString());
         }
         population.sort(Chromosome::compareTo);
 
@@ -65,10 +64,9 @@ public class GeneticAlgorithm {
     public static ArrayList<Chromosome> initializePopulation(ArrayList<Item> items, int populationSize){
         ArrayList<Chromosome> chromosomes = new ArrayList<>();
 
-        for(int i = 0; i < populationSize; i++){
+        for(int i = 0; i < populationSize; i++) {
             chromosomes.add(new Chromosome(items));
         }
-
         return chromosomes;
     }
 }
