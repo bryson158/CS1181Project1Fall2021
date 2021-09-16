@@ -2,14 +2,41 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GeneticAlgorithm {
+    private static Random rng = new Random();
+
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Item> items = readData("items.txt");
 
-        ArrayList<Chromosome> population = new ArrayList<>();
-        population.addAll(initializePopulation(items, 10));
+        ArrayList<Chromosome> population = new ArrayList<>(initializePopulation(items, 10));
+
+        //Epochs loop
+        for(int i = 0; i < 1000; i++){
+            population.sort(Chromosome::compareTo);
+
+            ArrayList<Chromosome> childChromosomes = new ArrayList<>();
+
+            //Creates child chromosomes
+            for(int p = 0; p < population.size(); p++){
+                childChromosomes.add(population.get(p).crossover(population.get(rng.nextInt(population.size()))));
+            }
+
+            childChromosomes.sort(Chromosome::compareTo);
+            //Adds only the 10 most fit children to the population
+            for(int p = 0; p < 10; p++){
+                population.add(childChromosomes.get(p));
+            }
+
+            //Determines which if any chromosomes mutate
+            for(Chromosome c: population){
+                if(rng.nextInt(15) == 1){
+                    c.mutate();
+                }
+            }
+        }
     }
 
     //Reads in the file and adds all the items in the file to an array list
