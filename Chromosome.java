@@ -37,7 +37,16 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
 
     //Determines if the chromosome will mutate or not
     public void mutate(){
-        //50% chance the chromosome will mutate
+        for(Item i: this){
+            if(rng.nextInt(5) == 1){
+                if(i.isIncluded()){
+                    i.setIncluded(false);
+                }
+                else {
+                    i.setIncluded(true);
+                }
+            }
+        }
     }
 
     //Scores the fitness of the chromosome if the chromosome weighs more than 10 pounds the result will be 0
