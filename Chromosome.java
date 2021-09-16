@@ -56,12 +56,12 @@ public class Chromosome extends ArrayList<Item> implements Comparable<Chromosome
         return (int) Math.round(totalWeight);
     }
 
-    //Compares the chromosomes to each other
+    //Compares the chromosomes to each other using their fitness scores
     public int compareTo(Chromosome other){
         return 0;
     }
 
-    //TODO- display all items included in the chromosome
+    //Displays all items in the chromosome
     public String toString(){
         StringBuilder returnedString = new StringBuilder();
 

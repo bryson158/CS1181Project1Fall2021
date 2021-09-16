@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class GeneticAlgorithm {
     //Reads in the file and adds all the items in the file to an array list
     public static ArrayList<Item> readData(String filename) throws FileNotFoundException{
         File itemsFile = new File(filename);
-        Scanner input = new Scanner(itemsFile);
+        Scanner input = new Scanner(new FileReader((itemsFile)));
         input.useDelimiter(",|\\n");
 
         ArrayList<Item> items = new ArrayList<>();
